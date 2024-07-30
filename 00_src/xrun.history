@@ -1,0 +1,60 @@
+s1(08Jul2024:06:07:26):  xrun alu.sv -access +rcw 
+s2(08Jul2024:06:08:32):  xrun alu.sv -access +rcw 
+s3(08Jul2024:06:11:14):  xrun alu.sv -access +rcw 
+s4(08Jul2024:06:12:10):  xrun alu.sv -access +rcw 
+s5(08Jul2024:06:12:34):  xrun alu.sv -access +rcw 
+s6(08Jul2024:06:13:04):  xrun alu.sv -access +rcw 
+s7(08Jul2024:06:18:19):  xrun shift_right_arith.sv -access +rcw 
+s8(08Jul2024:06:18:40):  xrun shift_right_arith.sv -access +rcw 
+s9(08Jul2024:06:19:03):  xrun shift_right_arith.sv -access +rcw 
+s10(08Jul2024:06:26:00):  xrun shift_right_arith.sv -access +rcw 
+s11(08Jul2024:06:26:06):  xrun shift_right_arith.sv -access +rcw 
+s12(08Jul2024:06:26:24):  xrun alu.sv -access +rcw 
+s13(10Jul2024:03:43:30):  xrun brcomp.sv -access +rcw 
+s14(10Jul2024:03:43:56):  xrun brcomp.sv -access +rcw 
+s15(10Jul2024:03:47:29):  xrun brcomp_tb.sv -access +rcw 
+s16(10Jul2024:03:47:53):  xrun brcomp_tb.sv -access +rcw 
+s17(10Jul2024:03:48:22):  xrun -gui brcomp.sv brcomp_tb.sv -access +rcw 
+s18(10Jul2024:03:50:42):  xrun -gui brcomp.sv brcomp_tb.sv -access +rcw 
+s19(10Jul2024:04:26:43):  xrun pc.sv -access +rcw 
+s20(10Jul2024:04:28:12):  xrun pc.sv -access +rcw 
+s21(10Jul2024:04:29:06):  xrun pc.sv -access +rcw 
+s22(10Jul2024:04:29:24):  xrun pc.sv -access +rcw 
+s23(10Jul2024:04:29:57):  xrun pc.sv -access +rcw 
+s24(10Jul2024:04:30:02):  xrun pc.sv -access +rcw 
+s25(10Jul2024:04:30:44):  xrun pc.sv -access +rcw 
+s26(10Jul2024:04:41:08):  xrun mux2to1_32bit.sv -access +rcw 
+s27(10Jul2024:05:00:46):  xrun mux3to1_32bit.sv -access +rcw 
+s28(10Jul2024:05:01:31):  xrun mux3to1_32bit.sv -access +rcw 
+s29(10Jul2024:05:02:12):  xrun mux3to1_32bit.sv -access +rcw 
+s30(10Jul2024:05:04:35):  xrun mux3to1_32bit.sv -access +rcw 
+s31(10Jul2024:06:07:01):  xrun mux3to1_32bit.sv -access +rcw 
+s32(10Jul2024:06:08:33):  xrun -gui mux3to1_32bit.sv mux3to1_32bit_tb.sv -access +rcw 
+s33(10Jul2024:06:10:36):  xrun -gui mux3to1_32bit.sv mux3to1_32bit_tb.sv -access +rcw 
+s34(10Jul2024:06:18:09):  xrun -gui mux3to1_32bit.sv mux3to1_32bit_tb.sv -access +rcw 
+s35(10Jul2024:06:18:33):  xrun -gui mux3to1_32bit.sv mux3to1_32bit_tb.sv -access +rcw 
+s36(10Jul2024:06:20:27):  xrun -gui mux3to1_32bit.sv mux3to1_32bit_tb.sv -access +rcw 
+s37(10Jul2024:06:20:51):  xrun -gui mux3to1_32bit.sv mux3to1_32bit_tb.sv -access +rcw 
+s38(10Jul2024:09:30:52):  xrun mux3to1_32bit.sv -access +rcw 
+s39(12Jul2024:04:27:40):  xrun mux3to1_32bit.sv -access +rcw 
+s40(12Jul2024:04:31:40):  xrun imem.sv -access +rcw 
+s41(12Jul2024:04:32:06):  xrun imem.sv -access +rcw 
+s42(12Jul2024:04:32:28):  xrun imem.sv -access +rcw 
+s43(12Jul2024:04:40:25):  xrun define.sv -access +rcw 
+s44(12Jul2024:04:46:21):  xrun imm_gen.sv -access +rcw 
+s45(12Jul2024:05:00:56):  xrun regfile.sv -access +rcw 
+s46(12Jul2024:05:02:16):  xrun regfile.sv -access +rcw 
+s47(24Jul2024:08:50:27):  xrun ctrl_unit.sv -access +rcw 
+s48(24Jul2024:09:11:49):  xrun set_less_than_unsign.sv -access +rcw 
+s49(24Jul2024:09:15:02):  xrun set_less_than_unsign.sv -access +rcw 
+s50(24Jul2024:09:16:28):  xrun set_less_than_unsign.sv -access +rcw 
+s51(24Jul2024:09:33:57):  xrun lsu.sv -access +rcw 
+s52(30Jul2024:10:18:54):  xrun singlecycle.sv -access +rcw 
+s53(30Jul2024:10:20:16):  xrun singlecycle.sv -access +rcw 
+s54(30Jul2024:10:32:57):  xrun lsu.sv -access +rcw 
+s55(30Jul2024:10:33:29):  xrun ctrl_unit.sv -access +rcw 
+s56(30Jul2024:10:33:45):  xrun mux3to1_32bit.sv -access +rcw 
+s57(30Jul2024:10:33:58):  xrun brcomp.sv -access +rcw 
+s58(30Jul2024:10:35:40):  xrun brcomp.sv -access +rcw 
+s59(30Jul2024:10:36:02):  xrun brcomp.sv -access +rcw 
+s60(30Jul2024:10:36:17):  xrun singlecycle.sv -access +rcw 

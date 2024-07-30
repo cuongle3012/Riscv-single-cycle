@@ -1,0 +1,13 @@
+00_src/alu.sv
+00_src/brcomp.sv
+00_src/ctrl_unit.sv
+00_src/define.sv
+00_src/imem.sv
+00_src/imm_gen.sv
+00_src/lsu.sv
+00_src/mux2to1_32bit.sv
+00_src/mux3to1_32bit.sv
+00_src/pc.sv
+00_src/regfile.sv
+00_src/set_less_than_unsign.sv
+00_src/singlecycle.sv

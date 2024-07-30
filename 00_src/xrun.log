@@ -1,0 +1,16 @@
+xrun(64): 20.09-s001: (c) Copyright 1995-2020 Cadence Design Systems, Inc.
+TOOL:	xrun(64)	20.09-s001: Started on Jul 30, 2024 at 10:36:16 EDT
+xrun
+	singlecycle.sv
+	-access +rcw
+file: singlecycle.sv
+		);
+		|
+xmvlog: *E,PLMIXU (singlecycle.sv,144|2): ordered and named port list mixed syntax [12.3.3][12.3.4(IEEE)].
+	module worklib.singlecycle:sv
+		errors: 1, warnings: 0
+xmvlog: *W,NOTOPL: no top-level unit found, must have recursive instances.
+	Total errors/warnings found outside modules and primitives:
+		errors: 0, warnings: 1
+xrun: *E,VLGERR: An error occurred during parsing.  Review the log file for errors with the code *E and fix those identified problems to proceed.  Exiting with code (status 1).
+TOOL:	xrun(64)	20.09-s001: Exiting on Jul 30, 2024 at 10:36:17 EDT  (total: 00:00:01)
