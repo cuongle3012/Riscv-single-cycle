@@ -59,16 +59,16 @@ module lsu( // A memory for loading(read) or storing(write) data words
 	end
 	
 	assign dataR_o = (rst_ni == 1'b0) ? 32'b0 : (input_region) ? {{15{1'b0}}, io_sw_i[16:0]} : mem[addr_i];
-	assign io_hex0_o = mem[256];
-	assign io_hex1_o = mem[257];
-	assign io_hex2_o = mem[258];
-	assign io_hex3_o = mem[259];
-	assign io_hex4_o = mem[260];
-	assign io_hex5_o = mem[261];
-	assign io_hex6_o = mem[262];
-	assign io_hex7_o = mem[263];
-	assign io_ledr_o = mem[264];
-	assign io_ledg_o = mem[265];
-	assign io_lcd_o = mem[266];
+	assign io_hex0_o = (rst_ni) ? 32'b0 : mem[256];
+	assign io_hex1_o = (rst_ni) ? 32'b0 : mem[257];
+	assign io_hex2_o = (rst_ni) ? 32'b0 : mem[258];
+	assign io_hex3_o = (rst_ni) ? 32'b0 : mem[259];
+	assign io_hex4_o = (rst_ni) ? 32'b0 : mem[260];
+	assign io_hex5_o = (rst_ni) ? 32'b0 : mem[261];
+	assign io_hex6_o = (rst_ni) ? 32'b0 : mem[262];
+	assign io_hex7_o = (rst_ni) ? 32'b0 : mem[263];
+	assign io_ledr_o = (rst_ni) ? 32'b0 : mem[264];
+	assign io_ledg_o = (rst_ni) ? 32'b0 : mem[265];
+	assign io_lcd_o = (rst_ni) ? 32'b0 : mem[266];
 	
 endmodule
