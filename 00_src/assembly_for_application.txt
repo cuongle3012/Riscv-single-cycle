@@ -1,0 +1,336 @@
+/*
+	Application: Input 3 2-D coordinates of A, B, and C. Determine which point, A or B, is closer to C
+	xA: register x10
+	xB: register x11
+	xC: register x12
+	yA: register x13
+	yB: register x14
+	yC: register x15
+	In DMEM: memory was declared look like registers 32bit that have address from 0 to 512
+		mem[0] = xA
+		mem[1] = yA
+		mem[2] = xB
+		mem[3] = yB
+		mem[4] = xC
+		mem[5] = yC
+*/
+
+
+
+// The program for application (not test yet)
+// In the top of code, cpu will load the value from switch, (notice switch 16 is trigger signal for reading value from switches), then compare the sw[16] with 1 (1 is trigger), if it's equal 1, value from sw[15:0] will be store in memory start at 0 address. if it's equal 0 the program will wait until the input passed. The memory will store 6 values from switches corresponding to 3 coordinate of 3 points A, B, C. After that, the program will compute the distances between A, C and A, B. In the end, cpu will compare 2 of distances in order to get the result
+
+/*
+	Tested on ModelSim with scale time
+	
+	Wait for input -> SW[15:0]:data, when push the button KEY[0] then data will be load (6 times)
+	-> compute distances between A vs C and B vs C -> compare -> display on lcd
+*/
+
+LCD:
+
+/*
+	Neu AC < BC thi hien A closer to C
+	Neu AC > BC thi hien B closer to C
+*/
+addi x3, x0, 0x40
+sw x3, 256(x0)
+sw x3, 257(x0)
+sw x3, 258(x0)
+sw x3, 259(x0)
+sw x3, 260(x0)
+sw x3, 261(x0)
+sw x3, 262(x0)
+sw x3, 263(x0)
+
+addi x24, x0, 1024  # E -> 1
+addi x25, x0, -1025 # E -> 0
+addi x26, x26, 512  # RS -> 1
+addi x27, x27, -513 # RS -> 0
+
+
+addi x22, x0, 1
+slli x22, x22, 31
+sw x22, 266(x0)	    # LCD_ON = 1	
+addi x21, x0, 500   # delay 50ms
+jal x1, Delay_x100us
+and x22, x22, x27
+addi x23, x0, 0x30	   # send command 0x30 first time
+jal x2, OUT_LCD
+addi x21, x0, 42    # delay 4.2ms
+jal x1, Delay_x100us
+and x22, x22, x27
+addi x23, x0, 0x30	    # send command 0x30 second time
+jal x2, OUT_LCD
+addi x21, x0, 2     # delay 0.2ms
+jal x1, Delay_x100us
+and x22, x22, x27
+addi x23, x0, 0x30	    # send command 0x30 third time
+jal x2, OUT_LCD
+addi x21, x0, 1		# delay 100us
+jal x1, Delay_x100us
+and x22, x22, x27
+addi x23, x0, 0x38	    # send command 0x38
+jal x2, OUT_LCD
+addi x21, x0, 1		# delay 100us
+jal x1, Delay_x100us
+and x22, x22, x27
+addi x23, x0, 0x01	   # send command 0x01
+jal x2, OUT_LCD
+addi x21, x0, 20    # delay 2ms
+jal x1, Delay_x100us
+and x22, x22, x27
+addi x23, x0, 0x0C  # send command 0x0C
+jal x2, OUT_LCD
+addi x21, x0, 1     # delay 100us
+jal x1, Delay_x100us
+and x22, x22, x27
+addi x23, x0, 0x06	# send command 0x06
+jal x2, OUT_LCD
+addi x21, x0, 1     # delay 100us
+jal x1, Delay_x100us
+
+#display Hello
+
+and x22, x22, x27	
+addi x23, x0, 0x01	    # clear lcd
+jal x2, OUT_LCD
+addi x21, x0, 20        # delay 2ms
+jal x1, Delay_x100us
+or x22, x22, x26	
+addi x23, x0, 0x48	    # print H charactor
+jal x2, OUT_LCD
+addi x21, x0, 1
+jal x1, Delay_x100us
+or x22, x22, x26
+addi x23, x0, 0x65	    # print e charactor
+jal x2, OUT_LCD
+addi x21, x0, 1
+jal x1, Delay_x100us
+or x22, x22, x26
+addi x23, x0, 0x6C	    # print l charactor
+jal x2, OUT_LCD
+addi x21, x0, 1
+jal x1, Delay_x100us
+or x22, x22, x26
+addi x23, x0, 0x6C	    # print l charactor
+jal x2, OUT_LCD
+addi x21, x0, 1
+jal x1, Delay_x100us
+or x22, x22, x26
+addi x23, x0, 0x6F	    # print o charactor
+jal x2, OUT_LCD
+
+addi x8, x0, 0
+addi x5, x0, 6
+
+load: lw x9, 320(x0)
+srli x7, x9, 16
+bne x7, x0, load        #------------------------
+
+addi x21, x0, 50
+re_read: 
+lw x9, 320(x0)
+srli x7, x9, 16
+bne x7, x0, load
+addi x21, x21, -1
+bne x21, x0, re_read        #---------------------------
+
+store:slli x9, x9, 16
+srai x9, x9, 16
+sw x9, 0(x8)
+sw x9, 264(x0)
+addi x3, x0, 0x30
+sw x3, 256(x8)
+addi x8, x8, 1
+
+loop: lw x9, 320(x0)
+srli x7, x9, 16
+beq x7, x0, loop
+
+addi x21, x0, 50
+re_read_2: 
+lw x9, 320(x0)
+srli x7, x9, 16
+beq x7, x0, loop
+addi x21, x21, -1
+bne x21, x0, re_read_2
+
+next: bltu x8, x5, load
+
+# compute
+
+lw x10, 0(x0)
+lw x13, 1(x0)
+lw x11, 2(x0)
+lw x14, 3(x0)
+lw x12, 4(x0)
+lw x15, 5(x0)
+
+
+sub x10, x12, x10
+sub x13, x15, x13
+mul x10, x10, x10
+mul x13, x13, x13
+add x10, x10, x13
+
+sub x11, x12, x11
+sub x14, x15, x14
+mul x11, x11, x11
+mul x14, x14, x14
+add x11, x11, x14
+
+
+blt x10, x11, A
+addi x28, x0, 0x42
+jal x1, start
+
+A: addi x28, x0, 0x41
+
+# display result A or B closer to C
+start: and x22, x22, x27	
+addi x23, x0, 0x01	    # clear lcd
+jal x2, OUT_LCD
+addi x21, x0, 20        # delay 2ms
+jal x1, Delay_x100us
+or x22, x22, x26	
+add x23, x0, x28	    # print A or B charactor
+jal x2, OUT_LCD
+addi x21, x0, 1
+jal x1, Delay_x100us
+or x22, x22, x26
+addi x23, x0, 0x20	    # print space
+jal x2, OUT_LCD
+addi x21, x0, 1
+jal x1, Delay_x100us
+or x22, x22, x26
+addi x23, x0, 0x63	    # print c charactor
+jal x2, OUT_LCD
+addi x21, x0, 1
+jal x1, Delay_x100us
+or x22, x22, x26
+addi x23, x0, 0x6C	    # print l charactor
+jal x2, OUT_LCD
+addi x21, x0, 1
+jal x1, Delay_x100us
+or x22, x22, x26
+addi x23, x0, 0x6F	    # print o charactor
+jal x2, OUT_LCD
+addi x21, x0, 1
+jal x1, Delay_x100us
+or x22, x22, x26
+addi x23, x0, 0x73	    # print s charactor
+jal x2, OUT_LCD
+addi x21, x0, 1
+jal x1, Delay_x100us
+or x22, x22, x26
+addi x23, x0, 0x65	    # print e charactor
+jal x2, OUT_LCD
+addi x21, x0, 1
+jal x1, Delay_x100us
+or x22, x22, x26
+addi x23, x0, 0x72	    # print r charactor
+jal x2, OUT_LCD
+addi x21, x0, 1
+jal x1, Delay_x100us
+or x22, x22, x26
+addi x23, x0, 0x20	    # print space
+jal x2, OUT_LCD
+addi x21, x0, 1
+jal x1, Delay_x100us
+or x22, x22, x26
+addi x23, x0, 0x74	    # print t charactor
+jal x2, OUT_LCD
+addi x21, x0, 1
+jal x1, Delay_x100us
+or x22, x22, x26
+addi x23, x0, 0x6F  # print o charactor
+jal x2, OUT_LCD
+addi x21, x0, 1
+jal x1, Delay_x100us
+or x22, x22, x26
+addi x23, x0, 0x20	    # print space
+jal x2, OUT_LCD
+addi x21, x0, 1
+jal x1, Delay_x100us
+or x22, x22, x26
+addi x23, x0, 0x43      # print C charactor
+jal x2, OUT_LCD
+addi x21, x0, 2000      # wait 2ms
+jal x1, Delay_x100us
+jal x1, start           # print again
+
+
+# delay x21 * 100us function
+Delay_x100us: addi x0, x0, 0
+L1: addi x20, x0, 1000
+L2: addi x20, x20, -1
+addi x0, x0, 0
+addi x0, x0, 0
+addi x0, x0, 0
+bne x20, x0, L2
+addi x21, x21, -1
+bne x21, x0, L1
+jalr x1, x1, 0
+
+
+#send data to lcd
+OUT_LCD: add x22, x22, x23
+sw x22, 266(x0)
+addi x21, x0, 1
+jal x1, Delay_x100us
+or x22, x22, x24
+sw x22, 266(x0)
+addi x21, x0, 1
+jal x1, Delay_x100us
+and x22, x22, x25
+sw x22, 266(x0)
+addi x21, x0, 1
+jal x1, Delay_x100us
+srli x22, x22, 8
+slli x22, x22, 8
+jalr x1, x2, 0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

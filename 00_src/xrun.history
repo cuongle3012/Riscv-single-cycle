@@ -58,3 +58,18 @@ s57(30Jul2024:10:33:58):  xrun brcomp.sv -access +rcw
 s58(30Jul2024:10:35:40):  xrun brcomp.sv -access +rcw 
 s59(30Jul2024:10:36:02):  xrun brcomp.sv -access +rcw 
 s60(30Jul2024:10:36:17):  xrun singlecycle.sv -access +rcw 
+s61(31Jul2024:22:16:51):  xrun alu.sv -access +rcw 
+s62(31Jul2024:22:31:56):  xrun alu.sv -access +rcw 
+s63(31Jul2024:22:35:07):  xrun alu.sv -access +rcw 
+s64(31Jul2024:22:35:36):  xrun alu.sv -access +rcw 
+s65(31Jul2024:22:46:59):  xrun shift_right_arith.sv -access +rcw 
+s66(03Aug2024:05:06:09):  xrun -gui imm_gen.sv -access +rcw 
+s67(04Aug2024:10:15:29):  xrun singlecycle.sv -access +rcw 
+s68(04Aug2024:10:16:35):  xrun singlecycle.sv -access +rcw 
+s69(04Aug2024:10:19:19):  xrun mux2to1_32bit.sv -access +rcw 
+s70(04Aug2024:10:19:32):  xrun singlecycle.sv -access +rcw 
+s71(04Aug2024:10:20:47):  xrun singlecycle.sv -access +rcw 
+s72(04Aug2024:10:23:00):  xrun singlecycle.sv -access +rcw 
+s73(04Aug2024:10:27:59):  xrun singlecycle.sv -access +rcw 
+s74(08Aug2024:09:54:22):  xrun Dmem.sv -access +rcw 
+s75(08Aug2024:09:58:52):  xrun singlecycle.sv -access +rcw 

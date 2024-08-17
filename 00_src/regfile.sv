@@ -1,10 +1,10 @@
-module regfile( 
-			input logic [31:0] dataW_i,
-			input logic [4:0] rsW_i, rs1_i, rs2_i,
-			input RegWEn_i,
-			input logic clk_i,
-			input logic rst_ni,
-			output logic [31:0] data1_o, data2_o
+module regfile( // Register file
+	input logic [31:0] dataW_i,
+	input logic [4:0] rsW_i, rs1_i, rs2_i,
+	input RegWEn_i,
+	input logic clk_i,
+	input logic rst_ni,
+	output logic [31:0] data1_o, data2_o
 	);
 	
 	logic [31:0] reg_r0_q;
@@ -115,8 +115,8 @@ module regfile(
 	end : Synchronous_register_write_back
 	
 	always_comb begin : Asynchronous_read
-		   case (rs1_i)
-		      5'd0: reg1_r = reg_r0_q;
+		case (rs1_i)
+		  5'd0: reg1_r = reg_r0_q;
         5'd1: reg1_r = reg_r1_q;
         5'd2: reg1_r = reg_r2_q;
         5'd3: reg1_r = reg_r3_q;
@@ -152,7 +152,7 @@ module regfile(
       endcase
 
       case (rs2_i)
-		      5'd0: reg2_r = reg_r0_q;
+		  5'd0: reg2_r = reg_r0_q;
         5'd1: reg2_r = reg_r1_q;
         5'd2: reg2_r = reg_r2_q;
         5'd3: reg2_r = reg_r3_q;
@@ -190,4 +190,5 @@ module regfile(
 
     assign data1_o = (rst_ni == 1'b0) ? 32'b0 : reg1_r;
     assign data2_o = (rst_ni == 1'b0) ? 32'b0 : reg2_r;
+	 
 endmodule

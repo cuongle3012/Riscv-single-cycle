@@ -1,9 +1,13 @@
+00_src/shift_right_arithmetic.sv
 00_src/alu.sv
+00_src/full_adder.sv
+00_src/adder_32bit.sv
 00_src/brcomp.sv
 00_src/ctrl_unit.sv
 00_src/define.sv
 00_src/imem.sv
 00_src/imm_gen.sv
+//00_src/Dmem.sv
 00_src/lsu.sv
 00_src/mux2to1_32bit.sv
 00_src/mux3to1_32bit.sv

@@ -27,18 +27,18 @@ module alu(
   assign uc = ua + ~ub + 33'h1;
   
   // Set if less than, set if less than unsign
-  assign slt_res = (sub[31]) ? 32'h1 : 32'h0;
-  assign sltu_res = (uc[32]) ? 32'h1 : 32'h0;
+  assign slt_res = (sub[31]) ? 1'b1 : 1'b0;
+  assign sltu_res = (uc[32]) ? 1'b1 : 1'b0;
   
   // Shift left logic, Shift right logic
   assign sll_res = operand_a << operand_b [4:0];
   assign srl_res = operand_a >> operand_b [4:0];
   
   // Shift right arithmetic
-  shift_right_arith sra(operand_a,operand_b[4:0], sra_res);
+  shift_right_arithmetic sra(operand_a,operand_b[4:0], sra_res);
   // Output select
-  always_comb
-     case(f[3:0])
+  always@(*)
+     case(f)
         4'b0000: s = sum;
         4'b1000: s = sub;
         4'b0001: s = sll_res;
