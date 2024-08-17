@@ -1,65 +1,79 @@
-module brcomp_tb;
-   // Inputs
-   logic [31:0] rs1_data, rs2_data;
-   logic br_unsigned;
+module brcomp_tb();
 
-   // Outputs
-   logic br_less, br_equal;
+    logic [31:0] rs1_i, rs2_i;
+    logic BrUn_i;
+    logic BrEq_o, BrLt_o;
 
-   // Instantiate the unit under test (UUT)
-   brcomp dut (
-      .rs1_data(rs1_data),
-      .rs2_data(rs2_data),
-      .br_unsigned(br_unsigned),
-      .br_less(br_less),
-      .br_equal(br_equal)
-   );
+    // Instantiate the brcomp module
+    brcomp uut (
+        .rs1_i(rs1_i),
+        .rs2_i(rs2_i),
+        .BrUn_i(BrUn_i),
+        .BrEq_o(BrEq_o),
+        .BrLt_o(BrLt_o)
+    );
 
-   initial begin
-      // Initialize inputs
-      rs1_data = 0;
-      rs2_data = 0;
-      br_unsigned = 0;
+    initial begin
+        $display("Starting testbench...");
 
-      // Test case 1: Both rs1_data and rs2_data are 0
-      #10 rs1_data = 32'h0000_0000;
-      rs2_data = 32'h0000_0000;
-      br_unsigned = 0;
-      #10
- 
-      // Test case 2: rs1_data is greater than rs2_data (signed comparison)
-      #10 rs1_data = 32'h0000_0005;
-      rs2_data = 32'h0000_0003;
-      br_unsigned = 0;
-      #10
- 
-      // Test case 3: rs1_data is less than rs2_data (signed comparison)
-      #10 rs1_data = 32'h0000_0003;
-      rs2_data = 32'h0000_0005;
-      br_unsigned = 0;
-      #10 
+        // Test case 1: rs1_i == rs2_i
+        rs1_i = 32'd10;
+        rs2_i = 32'd10;
+        BrUn_i = 0;
+        #10;
+        $display("Case 1: rs1_i == rs2_i, BrUn_i = %b => BrEq_o = %b, BrLt_o = %b", BrUn_i, BrEq_o, BrLt_o);
 
-      // Test case 4: rs1_data is greater than rs2_data (unsigned comparison)
-      #10 rs1_data = 32'h8000_0000;
-      rs2_data = 32'h0000_0001;
-      br_unsigned = 1;
-      #10
+        // Test case 2: rs1_i < rs2_i, signed comparison
+        rs1_i = 32'd5;
+        rs2_i = 32'd10;
+        BrUn_i = 0;
+        #10;
+        $display("Case 2: rs1_i < rs2_i (signed), BrUn_i = %b => BrEq_o = %b, BrLt_o = %b", BrUn_i, BrEq_o, BrLt_o);
 
-      // Test case 5: rs1_data is less than rs2_data (unsigned comparison)
-      #10 rs1_data = 32'h0000_0001;
-      rs2_data = 32'h8000_0000;
-      br_unsigned = 1;
-      #10
+        // Test case 3: rs1_i > rs2_i, signed comparison
+        rs1_i = 32'd20;
+        rs2_i = 32'd10;
+        BrUn_i = 0;
+        #10;
+        $display("Case 3: rs1_i > rs2_i (signed), BrUn_i = %b => BrEq_o = %b, BrLt_o = %b", BrUn_i, BrEq_o, BrLt_o);
 
-      // Test case 6: rs1_data is equal to rs2_data (signed and unsigned comparison)
-      #10 rs1_data = 32'h0000_0005;
-      rs2_data = 32'h0000_0005;
-      br_unsigned = 0;
-      #10 
-      br_unsigned = 1;
-      #10 
+        // Test case 4: rs1_i < rs2_i, unsigned comparison
+        rs1_i = 32'd5;
+        rs2_i = 32'd10;
+        BrUn_i = 1;
+        #10;
+        $display("Case 4: rs1_i < rs2_i (unsigned), BrUn_i = %b => BrEq_o = %b, BrLt_o = %b", BrUn_i, BrEq_o, BrLt_o);
 
-      $display("All test cases passed!");
-      $finish;
-   end
+        // Test case 5: rs1_i > rs2_i, unsigned comparison
+        rs1_i = 32'd20;
+        rs2_i = 32'd10;
+        BrUn_i = 1;
+        #10;
+        $display("Case 5: rs1_i > rs2_i (unsigned), BrUn_i = %b => BrEq_o = %b, BrLt_o = %b", BrUn_i, BrEq_o, BrLt_o);
+
+        // Test case 6: rs1_i < rs2_i, signed comparison with negative values
+        rs1_i = -32'd5;
+        rs2_i = 32'd10;
+        BrUn_i = 0;
+        #10;
+        $display("Case 6: rs1_i < rs2_i (signed with negative), BrUn_i = %b => BrEq_o = %b, BrLt_o = %b", BrUn_i, BrEq_o, BrLt_o);
+
+        // Test case 7: rs1_i > rs2_i, signed comparison with negative values
+        rs1_i = 32'd10;
+        rs2_i = -32'd5;
+        BrUn_i = 0;
+        #10;
+        $display("Case 7: rs1_i > rs2_i (signed with negative), BrUn_i = %b => BrEq_o = %b, BrLt_o = %b", BrUn_i, BrEq_o, BrLt_o);
+
+        // Test case 8: rs1_i < rs2_i, unsigned comparison with high values
+        rs1_i = 32'hFFFFFFFF;
+        rs2_i = 32'd10;
+        BrUn_i = 1;
+        #10;
+        $display("Case 8: rs1_i < rs2_i (unsigned with high value), BrUn_i = %b => BrEq_o = %b, BrLt_o = %b", BrUn_i, BrEq_o, BrLt_o);
+
+        $display("Testbench completed.");
+        $stop;
+    end
 endmodule
+

@@ -8,7 +8,7 @@ module regfile_tb;
    logic [31:0] rs1_data, rs2_data;
 	
 	regfile dut (
-    	.dataW_i(rd_data),
+  .dataW_i(rd_data),
 		.clk_i(clk_i),
 		.rst_ni(rst_ni),
 		.RegWEn_i(rd_wren),
@@ -23,16 +23,16 @@ module regfile_tb;
 		rs1_addr     = 5'd1;
 		rs2_addr     = 5'd2;
 		rd_addr      = 5'd0;  
-      rd_wren      = 1'b0;
+  rd_wren      = 1'b0;
 		rd_data      = 32'h13579bdf;
 		$dumpfile("regdump.vcd");
 		$dumpvars;
 	end
 	
 	initial begin
-    clk_i = 1'b0;
-	 forever #5 clk_i = !clk_i;
-   end
+ clk_i = 1'b0;
+	forever #5 clk_i = !clk_i;
+ end
 	
 	initial begin
 		#5
